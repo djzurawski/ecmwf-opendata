@@ -104,7 +104,6 @@ class Client:
     def __init__(
         self,
         source="ecmwf",
-        beta=True,
         preserve_request_order=False,
         infer_stream_keyword=True,
         debug=False,
@@ -112,7 +111,6 @@ class Client:
     ):
         self._url = None
         self.source = source
-        self.beta = beta
         self.preserve_request_order = preserve_request_order
         self.infer_stream_keyword = infer_stream_keyword
         self.session = requests.Session()
@@ -318,7 +316,7 @@ class Client:
 
     def prepare_request(self, request=None, **kwargs):
         DEFAULTS_FC = dict(
-            resol="0p4-beta" if self.beta else "0p4",
+            resol="0p25",
             type="fc",
             stream="oper",
             step=0,
@@ -326,7 +324,7 @@ class Client:
         )
 
         DEFAULTS_EF = dict(
-            resol="0p4-beta" if self.beta else "0p4",
+            resol="0p25",
             type=["cf", "pf"],
             stream="enfo",
             step=0,
